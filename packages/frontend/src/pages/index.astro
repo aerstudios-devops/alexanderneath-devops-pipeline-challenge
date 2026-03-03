@@ -1,0 +1,74 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Contact Form Challenge</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 2rem; max-width: 640px; }
+      form { display: grid; gap: 0.75rem; }
+      input, textarea, button { font: inherit; padding: 0.6rem; }
+      button { cursor: pointer; }
+      .hint { color: #444; font-size: 0.9rem; }
+      #result { margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Contact</h1>
+    <p class="hint">This static page submits to the backend challenge API.</p>
+
+    <form id="contact-form">
+      <label>
+        Name
+        <input name="name" type="text" required />
+      </label>
+
+      <label>
+        Email
+        <input name="email" type="email" required />
+      </label>
+
+      <label>
+        Message
+        <textarea name="message" required placeholder="Type your message"></textarea>
+      </label>
+
+      <button type="submit">Send</button>
+    </form>
+
+    <p id="result" aria-live="polite"></p>
+
+    <script>
+      const form = document.getElementById("contact-form");
+      const result = document.getElementById("result");
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const payload = {
+          name: String(formData.get("name") ?? ""),
+          email: String(formData.get("email") ?? ""),
+          message: String(formData.get("message") ?? "")
+        };
+
+        try {
+          const response = await fetch("http://localhost:3000/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            result.textContent = `Submission failed: ${JSON.stringify(data)}`;
+            return;
+          }
+
+          result.textContent = `Success: ${data.message}`;
+        } catch (error) {
+          result.textContent = `Request error: ${error instanceof Error ? error.message : String(error)}`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+node_modules/
+dist/
+
+# yarn berry
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# workspace artifacts
+packages/**/dist/
+packages/**/.astro/
+packages/**/.tmp-emails/
+
+# env
+.env
+.env.*
+
+# os
+.DS_Store

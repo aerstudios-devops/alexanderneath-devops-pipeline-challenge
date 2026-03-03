@@ -1,0 +1,15 @@
+{
+  "name": "devops-pipeline-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "yarn@4.6.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach -A -pt run build",
+    "dev:frontend": "yarn workspace @challenge/frontend dev",
+    "dev:backend": "yarn workspace @challenge/backend dev",
+    "lint": "yarn workspaces foreach -A -pt run lint"
+  }
+}
