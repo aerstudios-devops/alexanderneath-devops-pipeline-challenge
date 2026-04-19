@@ -24,14 +24,33 @@ Prerequisites:
 - Corepack enabled (`corepack enable`)
 - Yarn 4 via Corepack (repo uses `packageManager: yarn@4.6.0`)
 
+Verify your toolchain:
+
+- `node -v`
+- `corepack prepare yarn@4.6.0 --activate`
+- `corepack yarn -v`
+
 Commands:
 
-- `yarn install`
-- `yarn dev:backend`
-- `yarn dev:frontend`
+- `corepack yarn install`
+- `corepack yarn build`
+- `corepack yarn dev:backend`
+- `corepack yarn dev:frontend`
+- `corepack yarn check`
 
 Frontend default URL: `http://localhost:4321`  
 Backend default URL: `http://localhost:3000`
+
+Mock email output location:
+
+- `packages/backend/.tmp-emails`
+
+Windows notes:
+
+- If PowerShell blocks script execution:
+  - `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`
+- If `corepack enable` fails due to permissions, use:
+  - `corepack yarn <command>`
 
 ---
 
@@ -95,6 +114,19 @@ Backend default URL: `http://localhost:3000`
 - IaC structure supports AWS deployment patterns.
 - Networking/runtime/secrets decisions are discussed.
 - **Important caveat:** candidates are **not** expected to deploy at personal expense. A practical design and partial implementation is acceptable, and known gaps should be documented.
+
+---
+
+## Validation
+
+Run the following command from the repository root:
+
+- `corepack yarn check`
+
+This will:
+
+- run backend and shared library static validation (TypeScript)
+- build all packages in the monorepo
 
 ---
 
