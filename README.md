@@ -20,7 +20,7 @@ Use this monorepo as a baseline and evolve it into a delivery setup that is fast
 
 Prerequisites:
 
-- Node.js 20+
+- Node.js 20 (LTS recommended; newer versions may work but not validated)
 - Corepack enabled (`corepack enable`)
 - Yarn 4 via Corepack (repo uses `packageManager: yarn@4.6.0`)
 
@@ -127,6 +127,18 @@ This will:
 
 - run backend and shared library static validation (TypeScript)
 - build all packages in the monorepo
+
+---
+
+## CI Validation Flow
+
+The CI pipeline performs the following steps:
+
+- Install dependencies using an immutable install
+- Build all workspace packages
+- Run static validation (TypeScript) for backend and shared library
+
+This provides fast feedback on pull requests and ensures changes are safe to merge.
 
 ---
 
