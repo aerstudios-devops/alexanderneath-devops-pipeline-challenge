@@ -10,6 +10,7 @@
     "build": "yarn workspaces foreach -A -pt run build",
     "dev:frontend": "yarn workspace @challenge/frontend dev",
     "dev:backend": "yarn workspace @challenge/backend dev",
-    "lint": "yarn workspaces foreach -A -pt run lint"
+    "lint": "yarn workspace @challenge/backend lint && yarn workspace @challenge/lib lint",
+    "check": "yarn lint && yarn build"
   }
 }
