@@ -60,7 +60,14 @@
 
           const data = await response.json();
           if (!response.ok) {
-            result.textContent = `Submission failed: ${JSON.stringify(data)}`;
+            const emailErrors = data?.errors?.fieldErrors?.email;
+
+            if (Array.isArray(emailErrors) && emailErrors.length > 0) {
+              result.textContent = emailErrors[0];
+            } else {
+              result.textContent = "Submission failed. Please check your input and try again.";
+            }
+
             return;
           }
 
