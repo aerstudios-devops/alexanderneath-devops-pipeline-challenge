@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
-    "lint": "echo 'No lint configured for @challenge/backend'"
+    "lint": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@challenge/lib": "1.0.0",
